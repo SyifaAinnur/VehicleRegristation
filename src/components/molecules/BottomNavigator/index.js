@@ -1,11 +1,5 @@
 import React, {useState} from 'react';
-import {
-  Dimensions,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Dimensions, StyleSheet, Text, TouchableOpacity, View, } from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';

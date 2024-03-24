@@ -6,6 +6,7 @@ import {
     widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import HeaderPrimary from "../../components/molecules/HeaderPrimary";
+import { TextInput } from "../../components";
 import SecondStep from "./secondPage";
 import FirstStep from "./firstPage";
 import { useState } from "react";
@@ -56,7 +57,7 @@ const AddRegistryScreen = ({ navigation }) => {
                     </View>
                 </ProgressStep>
                 <ProgressStep label="Second Step" onNext={() => onHandleSecondNext()}>
-                    <View style={{ alignItems: 'center' }}>
+                    <View style={{ alignItems: 'left' }}>
                         <SecondStep />
                     </View>
                 </ProgressStep>
