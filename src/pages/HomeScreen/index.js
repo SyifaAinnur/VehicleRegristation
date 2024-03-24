@@ -1,4 +1,4 @@
-import { Button, SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { Gap, ItemHome } from '../../components'
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen'
@@ -12,13 +12,9 @@ const HomeScreen = () => {
             <ItemHome />
             <Gap height={20} />
             <View style={styles.container}>
-                <View style={styles.box}>
+                <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('AddRegistryScreen')}>
                     <Text style={styles.txt}>Add Registry</Text>
-                    <Button
-                        title="Go to Detailsss"
-                        onPress={() => navigation.navigate('AddRegistryScreen')}
-                    />
-                </View>
+                </TouchableOpacity>
                 <View style={styles.box}>
                     <Text style={styles.txt}>Data Registry</Text>
                 </View>
