@@ -18,15 +18,6 @@ const FirstStep = ({ form, setForm }) => {
 
     useEffect(() => {
         dispatch(getProvinceData(setData, setLoad));
-        // if (form?.province_id) {
-        //     dispatch(getCityData(form?.province_id, setDataCity, setLoad));
-        // }
-        // if (form?.city_id) {
-        //     dispatch(getDistrictData(form?.city_id, setDataDistrict, setLoad));
-        // }
-        // if (form?.district_id) {
-        //     dispatch(getVillageData(form?.district_id, setDataVillage, setLoad));
-        // }
     }, []);
 
     return (

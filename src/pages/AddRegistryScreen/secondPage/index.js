@@ -6,7 +6,8 @@ import { ImageBackground, Modal, SafeAreaView, ScrollView, StyleSheet, Text, Tou
 import { useState } from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-const SecondStep = () => {
+const SecondStep = ({form, setForm}) => {
+    console.log(form);
     const [modalVisible, setModalVisible] = useState(false);
     const [modalChoose, setModalChoose] = useState(false);
     const [tipe, setTipe] = useState('');
@@ -29,8 +30,10 @@ const SecondStep = () => {
                 };
                 if (tipe === 'ktp') {
                     setImageKTP(dataImage);
+                    setForm({...form, uploadKTP: dataImage});
                 } else {
                     setImageSelfie(dataImage);
+                    setForm({...form, uploadSelfie: dataImage});
                 }
 
             }
@@ -52,8 +55,10 @@ const SecondStep = () => {
                 };
                 if (tipe === 'ktp') {
                     setImageKTP(dataImage);
+                    setForm({...form, uploadKTP: dataImage});
                 }  else {
                     setImageSelfie(dataImage);
+                    setForm({...form, uploadSelfie: dataImage});
                 }
 
             }
@@ -71,6 +76,8 @@ const SecondStep = () => {
                         keyboardType="default"
                         placeholderTextColor="#CCCCCC"
                         stylesTextInput={{ color: '#858585' }}
+                        value={form?.noPolisi}
+                        onChangeText={(text) => setForm({ ...form, noPolisi: text })}
                     />
                     <Gap height={10} />
                     <TextInput
@@ -79,6 +86,8 @@ const SecondStep = () => {
                         keyboardType="default"
                         placeholderTextColor="#CCCCCC"
                         stylesTextInput={{ color: '#858585' }}
+                        value={form?.namaPemilik}
+                        onChangeText={(text) => setForm({ ...form, namaPemilik: text })}
                     />
                     <Gap height={10} />
                     <TextInput
@@ -87,6 +96,8 @@ const SecondStep = () => {
                         keyboardType="number"
                         placeholderTextColor="#CCCCCC"
                         stylesTextInput={{ color: '#858585' }}
+                        value={form?.noKTP}
+                        onChangeText={(text) => setForm({ ...form, noKTP: text })}
                     />
                     <Gap height={10} />
                     <Text>Upload Selfie</Text>

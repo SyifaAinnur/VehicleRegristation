@@ -12,6 +12,7 @@ import FirstStep from "./firstPage";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import FinishStep from "./thirdPage";
 
 const AddRegistryScreen = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -29,7 +30,11 @@ const AddRegistryScreen = ({ navigation }) => {
     })
 
     const [formSecondPage, setFormSecondPage] = useState({
-        test: 'ggfjfjddkgid',
+        noPolisi: '',
+        namaPemilik: '',
+        noKTP: '',
+        uploadSelfie: '',
+        uploadKTP: '',
     })
 
     const onHandleFirstNext = () => {
@@ -43,6 +48,12 @@ const AddRegistryScreen = ({ navigation }) => {
         dispatch({type: 'SET_ALL_DATA', value: newState});
     }
 
+    const onHandleFinish = () => {
+        // save global state
+        const finalState = { ...allData, ...formSecondPage };
+        dispatch({type: 'SET_ALL_DATA', value: finalState});
+    }
+
     return (
         <SafeAreaView style={styles.page}>
             <HeaderPrimary
@@ -51,19 +62,19 @@ const AddRegistryScreen = ({ navigation }) => {
                 onPress={() => navigation.goBack()}
             />
             <ProgressSteps>
-                <ProgressStep label="First Step" onNext={() => onHandleFirstNext()} onPrevious={() => console.log('previous')} >
+                <ProgressStep label="Personal Infromation" onNext={() => onHandleFirstNext()} onPrevious={() => console.log('previous')} >
                     <View style={{ alignItems: 'left' }}>
                         <FirstStep form={formFirstPage} setForm={setFormFirstPage} />
                     </View>
                 </ProgressStep>
-                <ProgressStep label="Second Step" onNext={() => onHandleSecondNext()}>
+                <ProgressStep label="Vehicle Information" onNext={() => onHandleSecondNext()}>
                     <View style={{ alignItems: 'left' }}>
-                        <SecondStep />
+                        <SecondStep form={formSecondPage} setForm={setFormSecondPage} />
                     </View>
                 </ProgressStep>
-                <ProgressStep label="Third Step">
-                    <View style={{ alignItems: 'center' }}>
-                        <Text>This is the content within step 3!</Text>
+                <ProgressStep label="Finish" onSubmit={() => onHandleFinish()}>
+                    <View style={{ alignItems: 'left' }}>
+                        <FinishStep form={allData} />
                     </View>
                 </ProgressStep>
             </ProgressSteps>
