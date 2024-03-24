@@ -3,6 +3,7 @@ const initGlobalState = {
     message: '',
     isLogin: false,
     loading: false,
+    allData: {},
   };
   
   export const globalReducer = (state = initGlobalState, action) => {
@@ -23,6 +24,12 @@ const initGlobalState = {
       return {
         ...state,
         loading: action.value,
+      };
+    }
+    if (action.type === 'SET_ALL_DATA') {
+      return {
+        ...state,
+        allData: action.value,
       };
     }
     return state;

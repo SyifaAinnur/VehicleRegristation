@@ -6,7 +6,8 @@ import { getCityData, getDistrictData, getProvinceData, getVillageData } from ".
 import { SelectList } from "react-native-dropdown-select-list";
 import Entypo from 'react-native-vector-icons/Entypo';
 
-const FirstStep = () => {
+const FirstStep = ({ form, setForm }) => {
+    console.log(form)
     const dispatch = useDispatch();
 
     const [load, setLoad] = useState(false);
@@ -14,48 +15,19 @@ const FirstStep = () => {
     const [dataCity, setDataCity] = useState([]);
     const [dataDistrict, setDataDistrict] = useState([]);
     const [dataVillage, setDataVillage] = useState([]);
-    const [selectedProvince, setSelectedProvince] = useState({});
-    const [selectedCity, setSelectedCity] = useState({});
-    const [selectedDistrict, setSelectedDistrict] = useState({});
-    const [selectedVillage, setSelectedVillage] = useState({});
-
 
     useEffect(() => {
         dispatch(getProvinceData(setData, setLoad));
-        dispatch(getCityData(selectedProvince, setDataCity, setLoad));
-        dispatch(getDistrictData(selectedCity, setDataDistrict, setLoad));
-        dispatch(getVillageData(selectedDistrict, setDataVillage, setLoad));
-    }, [selectedProvince, selectedCity, selectedDistrict]);
-
-    const filterData = data.map((item) => {
-        return {
-            key: item.id,
-            value: item.name,
-        }
-    })
-
-    const filterDataCity = dataCity.map((item) => {
-        return {
-            key: item.id,
-            value: item.name,
-        }
-    })
-
-    const filterDataDistrict = dataDistrict.map((item) => {
-        return {
-            key: item.id,
-            value: item.name,
-        }
-    })
-
-    const filterDataVillage = dataVillage.map((item) => {
-        return {
-            key: item.id,
-            value: item.name,
-        }
-    })
-
-
+        // if (form?.province_id) {
+        //     dispatch(getCityData(form?.province_id, setDataCity, setLoad));
+        // }
+        // if (form?.city_id) {
+        //     dispatch(getDistrictData(form?.city_id, setDataDistrict, setLoad));
+        // }
+        // if (form?.district_id) {
+        //     dispatch(getVillageData(form?.district_id, setDataVillage, setLoad));
+        // }
+    }, []);
 
     return (
         <SafeAreaView style={styles?.page}>
@@ -67,7 +39,8 @@ const FirstStep = () => {
                         keyboardType="default"
                         placeholderTextColor="#CCCCCC"
                         stylesTextInput={{ color: '#858585' }}
-                    // editable={false}
+                        value={form?.firstName}
+                        onChangeText={(text) => setForm({ ...form, firstName: text })}
                     />
                     <Gap height={10} />
                     <TextInput
@@ -76,6 +49,8 @@ const FirstStep = () => {
                         keyboardType="default"
                         placeholderTextColor="#CCCCCC"
                         stylesTextInput={{ color: '#858585' }}
+                        value={form?.lastName}
+                        onChangeText={(text) => setForm({ ...form, lastName: text })}
                     />
                     <Gap height={10} />
                     <TextInput
@@ -87,20 +62,24 @@ const FirstStep = () => {
                         multiline={true}
                         numberOfLines={4}
                         stylesTextInput={{ color: '#858585', textAlignVertical: 'top' }}
+                        value={form?.biodata}
+                        onChangeText={(text) => setForm({ ...form, biodata: text })}
                     />
                     <Gap height={10} />
                     <Text>Select Province</Text>
                     <Gap height={10} />
                     <SelectList
-                        data={filterData}
+                        data={data}
                         labelField="name"
-                        setSelected={setSelectedProvince}
+                        setSelected={(value) => {
+                            setForm({ ...form, province_id: value, city_id: '', district_id: '', village_id: '' });
+                            dispatch(getCityData(value, setDataCity, setLoad));
+                        }}
                         search={true}
                         arrowicon={<Entypo name="chevron-down" size={12} color={'black'} />}
                         searchicon={<Entypo name="magnifying-glass" size={12} color={'black'} />}
                         placeholder="Select Province"
                         placeholderTextColor="#CCCCCC"
-
                         styles={{
                             container: {
                                 borderWidth: 1,
@@ -117,9 +96,12 @@ const FirstStep = () => {
                     <Text>Select City</Text>
                     <Gap height={10} />
                     <SelectList
-                        data={filterDataCity}
+                        data={dataCity}
                         labelField="name"
-                        setSelected={setSelectedCity}
+                        setSelected={(value) => {
+                            setForm({ ...form, city_id: value, district_id: '', village_id: '' });
+                            dispatch(getDistrictData(value, setDataDistrict, setLoad));
+                        }}
                         search={true}
                         arrowicon={<Entypo name="chevron-down" size={12} color={'black'} />}
                         searchicon={<Entypo name="magnifying-glass" size={12} color={'black'} />}
@@ -143,9 +125,12 @@ const FirstStep = () => {
                     <Text>Select District</Text>
                     <Gap height={10} />
                     <SelectList
-                        data={filterDataDistrict}
+                        data={dataDistrict}
                         labelField="name"
-                        setSelected={setSelectedDistrict}
+                        setSelected={(value) => {
+                            setForm({ ...form, district_id: value, village_id: '' });
+                            dispatch(getVillageData(value, setDataVillage, setLoad));
+                        }}
                         search={true}
                         arrowicon={<Entypo name="chevron-down" size={12} color={'black'} />}
                         searchicon={<Entypo name="magnifying-glass" size={12} color={'black'} />}
@@ -169,9 +154,11 @@ const FirstStep = () => {
                     <Text>Select villages / ward</Text>
                     <Gap height={10} />
                     <SelectList
-                        data={filterDataVillage}
+                        data={dataVillage}
                         labelField="name"
-                        setSelected={setSelectedVillage}
+                        setSelected={(value) => {
+                            setForm({ ...form, village_id: value});
+                        }}
                         search={true}
                         arrowicon={<Entypo name="chevron-down" size={12} color={'black'} />}
                         searchicon={<Entypo name="magnifying-glass" size={12} color={'black'} />}
