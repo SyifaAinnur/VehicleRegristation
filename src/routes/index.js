@@ -1,6 +1,7 @@
+import { AddRegistryScreen, HomeScreen, SplashScreen } from "../pages";
+
 const { createNativeStackNavigator } = require('@react-navigation/native-stack');
 const { BottomNavigator } = require('../components/molecules');
-const { HomeScreen, SplashScreen, ReservationScreen, ProfileScreen, EditProfileScreen, HistoryScreen, LoginScreen, RegisterScreen, ForgetPassword, RequestMitra, ProfileMitraScreen, EditProfileMitraScreen, HistoryManagementMitra, DetailScreen, DetailHistoryScreen, DetailAddress, GetStartedScreen, FnQScreen, NotifUserScreen, NotifMitraScreen, DetailDirection, WhatsappScreen } = require('../pages');
 const { createBottomTabNavigator } = require('@react-navigation/bottom-tabs');
 
 const Stack = createNativeStackNavigator();
@@ -49,6 +50,11 @@ const Router = () => {
       <Stack.Screen
         component={HomeScreen}
         name="HomeScreen"
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        component={AddRegistryScreen}
+        name="AddRegistryScreen"
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

@@ -22,7 +22,7 @@ const SplashScreen = ({ navigation }) => {
         start={{ x: 0, y: 0.5 }}
         end={{ x: 1, y: 0 }}
         style={styles.gradient}>
-        <Text style={styles.txt}>BengkelAja</Text>
+        <Text style={styles.txt}>Vehicle Registration</Text>
       </LinearGradient>
     </SafeAreaView>
   );

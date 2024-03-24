@@ -1,10 +1,12 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
+import { Button, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Gap, ItemHome } from '../../components'
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
+import { useNavigation } from '@react-navigation/native'
 
 const HomeScreen = () => {
+    const navigation = useNavigation();
     return (
         <SafeAreaView style={styles.page}>
             <ItemHome />
@@ -12,10 +14,13 @@ const HomeScreen = () => {
             <View style={styles.container}>
                 <View style={styles.box}>
                     <Text style={styles.txt}>Add Registry</Text>
+                    <Button
+                        title="Go to Detailsss"
+                        onPress={() => navigation.navigate('AddRegistryScreen')}
+                    />
                 </View>
                 <View style={styles.box}>
                     <Text style={styles.txt}>Data Registry</Text>
-
                 </View>
             </View>
         </SafeAreaView>
