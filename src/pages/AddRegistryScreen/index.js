@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, View } from "react-native"
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 import { Text } from "react-native-svg";
 import {
@@ -6,11 +6,42 @@ import {
     widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import HeaderPrimary from "../../components/molecules/HeaderPrimary";
-import FirstStep from "./FirstStep";
-import { TextInput } from "../../components";
 import SecondStep from "./secondPage";
+import FirstStep from "./firstPage";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const AddRegistryScreen = ({ navigation }) => {
+    const dispatch = useDispatch();
+    const {allData} = useSelector((state) => state.globalReducer);
+    console.log('allData', allData);
+    // local state
+    const [formFirstPage, setFormFirstPage] = useState({
+        firstName: '',
+        lastName: '',
+        biodata: '',
+        province_id: '',
+        district_id: '',
+        city_id: '',
+        village_id: '',
+    })
+
+    const [formSecondPage, setFormSecondPage] = useState({
+        test: 'ggfjfjddkgid',
+    })
+
+    const onHandleFirstNext = () => {
+        // save global state
+        dispatch({type: 'SET_ALL_DATA', value: formFirstPage});
+    }
+
+    const onHandleSecondNext = () => {
+        // merge state 1 & 2
+        const newState = { ...formFirstPage, ...formSecondPage };
+        dispatch({type: 'SET_ALL_DATA', value: newState});
+    }
+
     return (
         <SafeAreaView style={styles.page}>
             <HeaderPrimary
@@ -19,12 +50,12 @@ const AddRegistryScreen = ({ navigation }) => {
                 onPress={() => navigation.goBack()}
             />
             <ProgressSteps>
-                <ProgressStep label="First Step">
+                <ProgressStep label="First Step" onNext={() => onHandleFirstNext()} onPrevious={() => console.log('previous')} >
                     <View style={{ alignItems: 'left' }}>
-                        <FirstStep />
+                        <FirstStep form={formFirstPage} setForm={setFormFirstPage} />
                     </View>
                 </ProgressStep>
-                <ProgressStep label="Second Step">
+                <ProgressStep label="Second Step" onNext={() => onHandleSecondNext()}>
                     <View style={{ alignItems: 'center' }}>
                         <SecondStep />
                     </View>
@@ -66,4 +97,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#000',
     },
+    nextBtnTextStyle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#000',
+    }
 })
