@@ -1,214 +1,40 @@
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native"
-import { useEffect, useState } from "react"
-import { useDispatch } from "react-redux";
-import { SelectList } from "react-native-dropdown-select-list";
-import Entypo from 'react-native-vector-icons/Entypo';
-import { getCityData, getDistrictData, getProvinceData, getVillageData } from "../../redux/actions/global";
-import { Gap, TextInput } from "../../components";
+import { SafeAreaView, StyleSheet, View } from "react-native"
+import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
+import { Text } from "react-native-svg";
+import {
+    heightPercentageToDP as hp,
+    widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 import HeaderPrimary from "../../components/molecules/HeaderPrimary";
-
+import FirstStep from "./FirstStep";
+import { TextInput } from "../../components";
+import SecondStep from "./secondPage";
 
 const AddRegistryScreen = ({ navigation }) => {
-
-    const dispatch = useDispatch();
-
-    const [load, setLoad] = useState(false);
-    const [data, setData] = useState([]);
-    const [dataCity, setDataCity] = useState([]);
-    const [dataDistrict, setDataDistrict] = useState([]);
-    const [dataVillage, setDataVillage] = useState([]);
-    const [selectedProvince, setSelectedProvince] = useState({});
-    const [selectedCity, setSelectedCity] = useState({});
-    const [selectedDistrict, setSelectedDistrict] = useState({});
-    const [selectedVillage, setSelectedVillage] = useState({});
-
-    useEffect(() => {
-        dispatch(getProvinceData(setData, setLoad));
-        dispatch(getCityData(selectedProvince, setDataCity, setLoad));
-        dispatch(getDistrictData(selectedCity, setDataDistrict, setLoad));
-        dispatch(getVillageData(selectedDistrict, setDataVillage, setLoad));
-    }, [selectedProvince, selectedCity, selectedDistrict]);
-
-    const filterData = data.map((item) => {
-        return {
-            key: item.id,
-            value: item.name,
-        }
-    })
-
-    const filterDataCity = dataCity.map((item) => {
-        return {
-            key: item.id,
-            value: item.name,
-        }
-    })
-
-    const filterDataDistrict = dataDistrict.map((item) => {
-        return {
-            key: item.id,
-            value: item.name,
-        }
-    })
-
-    const filterDataVillage = dataVillage.map((item) => {
-        return {
-            key: item.id,
-            value: item.name,
-        }
-    })
-
     return (
-        <SafeAreaView style={styles?.page}>
+        <SafeAreaView style={styles.page}>
             <HeaderPrimary
                 title="Registry Vehicle"
                 type={'back'}
                 onPress={() => navigation.goBack()}
             />
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={{ paddingHorizontal: 15 }}>
-                    <TextInput
-                        lable="First Name"
-                        placeholder="Masukkan nama depan"
-                        keyboardType="default"
-                        placeholderTextColor="#CCCCCC"
-                        stylesTextInput={{ color: '#858585' }}
-                    // editable={false}
-                    />
-                    <Gap height={10} />
-                    <TextInput
-                        lable="Last Name"
-                        placeholder="Masukkan nama belakang"
-                        keyboardType="default"
-                        placeholderTextColor="#CCCCCC"
-                        stylesTextInput={{ color: '#858585' }}
-                    />
-                    <Gap height={10} />
-                    <TextInput
-                        lable="Biodata"
-                        type="textarea"
-                        placeholder="Masukkan biodata"
-                        keyboardType="default"
-                        placeholderTextColor="#CCCCCC"
-                        multiline={true}
-                        numberOfLines={4}
-                        stylesTextInput={{ color: '#858585', textAlignVertical: 'top' }}
-                    />
-                    <Gap height={10} />
-                    <Text>Select Province</Text>
-                    <Gap height={10} />
-                    <SelectList
-                        data={filterData}
-                        labelField="name"
-                        setSelected={setSelectedProvince}
-                        search={true}
-                        arrowicon={<Entypo name="chevron-down" size={12} color={'black'} />}
-                        searchicon={<Entypo name="magnifying-glass" size={12} color={'black'} />}
-                        placeholder="Select Province"
-                        placeholderTextColor="#CCCCCC"
-
-                        styles={{
-                            container: {
-                                borderWidth: 1,
-                                borderColor: '#CCCCCC',
-                                borderRadius: 5,
-                                padding: 10,
-                            },
-                            text: {
-                                color: '#858585',
-                            },
-                        }}
-                    />
-                    {selectedProvince.length > 0 && (
-                        <>
-                            <Gap height={10} />
-                            <Text>Select City</Text>
-                            <Gap height={10} />
-                            <SelectList
-                                data={filterDataCity}
-                                labelField="name"
-                                setSelected={setSelectedCity}
-                                search={true}
-                                arrowicon={<Entypo name="chevron-down" size={12} color={'black'} />}
-                                searchicon={<Entypo name="magnifying-glass" size={12} color={'black'} />}
-                                placeholder="Select City"
-                                placeholderTextColor="#CCCCCC"
-
-                                styles={{
-                                    container: {
-                                        borderWidth: 1,
-                                        borderColor: '#CCCCCC',
-                                        borderRadius: 5,
-                                        padding: 10,
-                                    },
-                                    text: {
-                                        color: '#858585',
-                                    },
-                                }}
-                            />
-                        </>
-                    )}
-
-                    {selectedProvince.length > 0 && selectedCity.length > 0 && (
-                        <>
-                            <Gap height={10} />
-                            <Text>Select District</Text>
-                            <Gap height={10} />
-                            <SelectList
-                                data={filterDataDistrict}
-                                labelField="name"
-                                setSelected={setSelectedDistrict}
-                                search={true}
-                                arrowicon={<Entypo name="chevron-down" size={12} color={'black'} />}
-                                searchicon={<Entypo name="magnifying-glass" size={12} color={'black'} />}
-                                placeholder="Select City"
-                                placeholderTextColor="#CCCCCC"
-
-                                styles={{
-                                    container: {
-                                        borderWidth: 1,
-                                        borderColor: '#CCCCCC',
-                                        borderRadius: 5,
-                                        padding: 10,
-                                    },
-                                    text: {
-                                        color: '#858585',
-                                    },
-                                }}
-                            />
-                        </>
-                    )}
-
-                    {selectedProvince.length > 0 && selectedCity.length > 0 && selectedDistrict.length > 0 && (
-                        <>
-                            <Gap height={10} />
-                            <Text>Select villages / ward</Text>
-                            <Gap height={10} />
-                            <SelectList
-                                data={filterDataVillage}
-                                labelField="name"
-                                setSelected={setSelectedVillage}
-                                search={true}
-                                arrowicon={<Entypo name="chevron-down" size={12} color={'black'} />}
-                                searchicon={<Entypo name="magnifying-glass" size={12} color={'black'} />}
-                                placeholder="Select City"
-                                placeholderTextColor="#CCCCCC"
-
-                                styles={{
-                                    container: {
-                                        borderWidth: 1,
-                                        borderColor: '#CCCCCC',
-                                        borderRadius: 5,
-                                        padding: 10,
-                                    },
-                                    text: {
-                                        color: '#858585',
-                                    },
-                                }}
-                            />
-                        </>
-                    )}
-                </View>
-            </ScrollView>
+            <ProgressSteps>
+                <ProgressStep label="First Step">
+                    <View style={{ alignItems: 'left' }}>
+                        <FirstStep />
+                    </View>
+                </ProgressStep>
+                <ProgressStep label="Second Step">
+                    <View style={{ alignItems: 'center' }}>
+                        <SecondStep />
+                    </View>
+                </ProgressStep>
+                <ProgressStep label="Third Step">
+                    <View style={{ alignItems: 'center' }}>
+                        <Text>This is the content within step 3!</Text>
+                    </View>
+                </ProgressStep>
+            </ProgressSteps>
         </SafeAreaView>
     )
 }
@@ -218,14 +44,26 @@ export default AddRegistryScreen
 const styles = StyleSheet.create({
     page: {
         flex: 1,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#FFF',
     },
-    center: {
+    container: {
+        flexWrap: 'wrap',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 20,
+    },
+    box: {
+        width: wp('42%'),
+        height: hp('20%'),
+        borderWidth: 2,
+        borderColor: '#4CCD99',
+        borderRadius: 15,
+        justifyContent: 'center',
         alignItems: 'center',
     },
-    imageProfile: {
-        width: 100,
-        height: 100,
-        borderRadius: 100,
+    txt: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#000',
     },
-});
+})
