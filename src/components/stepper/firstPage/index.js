@@ -1,10 +1,11 @@
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native"
-import { Gap, TextInput } from "../../../components"
-import { useCallback, useEffect, useState } from "react"
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { findCity, findDistrict, findProvince, findVillage, getCityData, getDistrictData, getProvinceData, getVillageData } from "../../../redux/actions/global";
+
 import { SelectList } from "react-native-dropdown-select-list";
 import Entypo from 'react-native-vector-icons/Entypo';
+import { findCity, findDistrict, findProvince, findVillage, getCityData, getDistrictData, getProvinceData, getVillageData } from "../../../redux/actions/global";
+import { Gap, TextInput } from "../..";
 
 const FirstStep = ({ form, setForm }) => {
     console.log(form)
@@ -19,10 +20,6 @@ const FirstStep = ({ form, setForm }) => {
     const [city, setCity] = useState('');
     const [district, setDistrict] = useState('');
     const [village, setVillage] = useState('');
-
-    const setDataField = (field, value) => {
-        setForm(prevForm => ({ ...prevForm, [field]: value }));
-    };
 
     useEffect(() => {
         dispatch(getProvinceData(setData, setLoad));

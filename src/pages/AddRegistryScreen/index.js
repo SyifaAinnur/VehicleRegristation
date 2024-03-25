@@ -7,12 +7,12 @@ import {
 } from 'react-native-responsive-screen';
 import HeaderPrimary from "../../components/molecules/HeaderPrimary";
 import { TextInput } from "../../components";
-import SecondStep from "./secondPage";
-import FirstStep from "./firstPage";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import FinishStep from "./thirdPage";
+import FirstStep from "../../components/stepper/firstPage";
+import SecondStep from "../../components/stepper/secondPage";
+import FinishStep from "../../components/stepper/thirdPage";
 
 const AddRegistryScreen = ({ navigation }) => {
     const dispatch = useDispatch();
