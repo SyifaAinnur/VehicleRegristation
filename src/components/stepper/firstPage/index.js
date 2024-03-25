@@ -54,7 +54,7 @@ const FirstStep = ({ form, setForm }) => {
 
     return (
         <SafeAreaView style={styles?.page}>
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false} nestedScrollEnabled={true}>
                 <View style={{ paddingHorizontal: 15 }}>
                     <TextInput
                         lable="First Name"
