@@ -4,12 +4,9 @@ import { Gap, ItemHome } from '../../components'
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import { useNavigation } from '@react-navigation/native'
-import { useSelector } from 'react-redux'
 
 const HomeScreen = () => {
     const navigation = useNavigation();
-    const {allData} = useSelector((state) => state.globalReducer);
-    console.log('allDatas', allData);
     return (
         <SafeAreaView style={styles.page}>
             <ItemHome />
@@ -18,9 +15,9 @@ const HomeScreen = () => {
                 <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('AddRegistryScreen')}>
                     <Text style={styles.txt}>Add Registry</Text>
                 </TouchableOpacity>
-                <View style={styles.box}>
+                <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('DataRegistryScreen')}>
                     <Text style={styles.txt}>Data Registry</Text>
-                </View>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     )

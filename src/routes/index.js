@@ -1,4 +1,4 @@
-import { AddRegistryScreen, HomeScreen, SplashScreen } from "../pages";
+import { AddRegistryScreen, DataRegistryScreen, HomeScreen, SplashScreen } from "../pages";
 
 const { createNativeStackNavigator } = require('@react-navigation/native-stack');
 const { BottomNavigator } = require('../components/molecules');
@@ -6,34 +6,6 @@ const { createBottomTabNavigator } = require('@react-navigation/bottom-tabs');
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-
-const MainApp = () => {
-  return (
-    <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{ headerShown: false }}
-      />
-      <Tab.Screen
-        name="Notifikasi"
-        component={HomeScreen}
-        options={{ headerShown: false }}
-      />
-      <Tab.Screen
-        name="Riwayat"
-        component={HomeScreen}
-        options={{ headerShown: false }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={HomeScreen}
-        options={{ headerShown: false }}
-      />
-    </Tab.Navigator>
-  );
-};
-
 const Router = () => {
   return (
     <Stack.Navigator>
@@ -55,6 +27,11 @@ const Router = () => {
       <Stack.Screen
         component={AddRegistryScreen}
         name="AddRegistryScreen"
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        component={DataRegistryScreen}
+        name="DataRegistryScreen"
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
