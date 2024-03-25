@@ -7,16 +7,13 @@ import { useState } from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const SecondStep = ({form, setForm}) => {
-    console.log(form);
     const [modalVisible, setModalVisible] = useState(false);
     const [modalChoose, setModalChoose] = useState(false);
     const [tipe, setTipe] = useState('');
     const [imageSelfie, setImageSelfie] = useState(null);
     const [imageKTP, setImageKTP] = useState(null);
 
-    console.log(imageSelfie);
-
-    const pickImage = async (type) => {
+    const pickImage = async () => {
         launchImageLibrary({
             quality: 0.5,
             mediaType: 'photo',

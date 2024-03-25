@@ -8,9 +8,7 @@ import { findCity, findDistrict, findProvince, findVillage, getCityData, getDist
 import { Gap, TextInput } from "../..";
 
 const FirstStep = ({ form, setForm }) => {
-    console.log(form)
     const dispatch = useDispatch();
-
     const [load, setLoad] = useState(false);
     const [data, setData] = useState([]);
     const [dataCity, setDataCity] = useState([]);
