@@ -146,6 +146,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
+        borderColor: '#CCC',
+        borderWidth: 1,
+        borderRadius: 10,
+        paddingHorizontal: 15,
+        paddingVertical: 15,
     },
     title: {
         color: '#000',
