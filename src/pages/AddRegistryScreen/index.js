@@ -53,6 +53,8 @@ const AddRegistryScreen = ({ navigation }) => {
                 text2: 'Please fill all the form',
             });
             setError(true)
+        } else {
+            setError(false)
         }
     }
 
@@ -67,6 +69,8 @@ const AddRegistryScreen = ({ navigation }) => {
                 text2: 'Please fill all the form',
             });
             setError(true)
+        } else {
+            setError(false)
         }
     }
 

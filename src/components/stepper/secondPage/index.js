@@ -139,7 +139,7 @@ const SecondStep = ({form, setForm}) => {
                             </TouchableOpacity>
                         </ImageBackground>
                     </View>
-                    {imageSelfie && imageSelfie.uri.length > 0 || form.uploadSelfie?.uri && (
+                    {form.uploadSelfie?.uri && (
                         <TouchableOpacity onPress={() => setModalChoose(true)}>
                             <Text style={{ color: '#007B9A', textAlign: 'center' }}>Reupload</Text>
                         </TouchableOpacity>
@@ -183,7 +183,7 @@ const SecondStep = ({form, setForm}) => {
                             </TouchableOpacity>
                         </ImageBackground>
                     </View>
-                    {imageKTP && imageKTP.uri.length > 0 || form.uploadKTP?.uri && (
+                    {form.uploadKTP?.uri && (
                         <TouchableOpacity onPress={() => setModalChoose(true)}>
                             <Text style={{ color: '#007B9A', textAlign: 'center' }}>Reupload</Text>
                         </TouchableOpacity>
