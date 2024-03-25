@@ -24,9 +24,13 @@ const AddRegistryScreen = ({ navigation }) => {
         lastName: '',
         biodata: '',
         province_id: '',
+        province_name: '',
         district_id: '',
+        district_name: '',
         city_id: '',
+        city_name: '',
         village_id: '',
+        village_name: '',
     })
 
     const [formSecondPage, setFormSecondPage] = useState({

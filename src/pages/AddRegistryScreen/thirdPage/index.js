@@ -1,54 +1,100 @@
-import { ImageBackground, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ImageBackground, Modal, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Gap } from "../../../components";
+import ImageViewer from "react-native-image-zoom-viewer";
+import { useState } from "react";
 
 const FinishStep = ({ form }) => {
+    const [tipe, setTipe] = useState('');
+    const [modalVisible, setModalVisible] = useState(false);
+
     return (
         <SafeAreaView style={styles?.page}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{ paddingHorizontal: 15 }}>
-                    <Gap height={10} />
-                    <Text>First Name: {form.firstName ?? "-"}</Text>
-                    <Gap height={10} />
-                    <Text>Last Name: {form.lastName ?? "-"}</Text>
-                    <Gap height={10} />
-                    <Text>Biodata: {form.biodata ?? "-"}</Text>
-                    <Gap height={10} />
-                    <Text>Province: {form.province_id ?? "-"}</Text>
-                    <Gap height={10} />
-                    <Text>City: {form.city_id ?? "-"}</Text>
-                    <Gap height={10} />
-                    <Text>District: {form.district_id ?? "-"}</Text>
-                    <Gap height={10} />
-                    <Text>Village: {form.village_id ?? "-"}</Text>
-                    <Gap height={10} />
-                    <Text>No Polisi: {form.noPolisi ?? "-"}</Text>
-                    <Gap height={10} />
-                    <Text>Nama Pemilik: {form.namaPemilik ?? "-"}</Text>
-                    <Gap height={10} />
-                    <Text>No KTP: {form.noKTP ?? "-"}</Text>
-                    <Gap height={10} />
+                    <View style={styles?.container}>
+                        <View style={styles?.title}>
+                            <Text>First Name: </Text>
+                            <Gap height={10} />
+                            <Text>Last Name: </Text>
+                            <Gap height={10} />
+                            <Text>Biodata: </Text>
+                            <Gap height={10} />
+                            <Text>Province: </Text>
+                            <Gap height={10} />
+                            <Text>City: </Text>
+                            <Gap height={10} />
+                            <Text>District: </Text>
+                            <Gap height={10} />
+                            <Text>Village: </Text>
+                            <Gap height={10} />
+                            <Text>No Polisi: </Text>
+                            <Gap height={10} />
+                            <Text>Nama Pemilik: </Text>
+                            <Gap height={10} />
+                            <Text>No KTP: </Text>
+                        </View>
+                        <View style={styles.value}>
+                            <Text>{form.firstName ?? "-"}</Text>
+                            <Gap height={10} />
+                            <Text>{form.lastName ?? "-"}</Text>
+                            <Gap height={10} />
+                            <Text>{form.biodata ?? "-"}</Text>
+                            <Gap height={10} />
+                            <Text>{form.province_name ?? "-"}</Text>
+                            <Gap height={10} />
+                            <Text>{form.city_name ?? "-"}</Text>
+                            <Gap height={10} />
+                            <Text>{form.district_name ?? "-"}</Text>
+                            <Gap height={10} />
+                            <Text>{form.village_name ?? "-"}</Text>
+                            <Gap height={10} />
+                            <Text>{form.noPolisi ?? "-"}</Text>
+                            <Gap height={10} />
+                            <Text>{form.namaPemilik ?? "-"}</Text>
+                            <Gap height={10} />
+                            <Text>{form.noKTP ?? "-"}</Text>
+                        </View>
+                    </View>
                     <Text>Selfie</Text>
-                    <ImageBackground
-                        source={{
-                            uri: form?.uploadSelfie ?
-                                form?.uploadSelfie?.uri :
-                                'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',
-                        }}
-                        style={styles?.imageProfile}
-                        imageStyle={{ borderRadius: 20 }}>
-                    </ImageBackground>
+                    <TouchableOpacity onPress={() => {
+                        setTipe('selfie');
+                        setModalVisible(true);
+                    }}>
+                        <ImageBackground
+                            source={{
+                                uri: form?.uploadSelfie ?
+                                    form?.uploadSelfie?.uri :
+                                    'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',
+                            }}
+                            style={styles?.imageProfile}
+                            imageStyle={{ borderRadius: 20 }}>
+
+                        </ImageBackground>
+                    </TouchableOpacity>
                     <Gap height={10} />
                     <Text>KTP</Text>
-                    <ImageBackground
-                        source={{
-                            uri: form?.uploadKTP ?
-                                form?.uploadKTP?.uri :
-                                'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',
-                        }}
-                        style={styles?.imageProfile}
-                        imageStyle={{ borderRadius: 20 }}>
-                    </ImageBackground>
+                    <TouchableOpacity onPress={() => {
+                        setTipe('ktp');
+                        setModalVisible(true);
+                    }}>
+                        <ImageBackground
+                            source={{
+                                uri: form?.uploadKTP ?
+                                    form?.uploadKTP?.uri :
+                                    'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',
+                            }}
+                            style={styles?.imageProfile}
+                            imageStyle={{ borderRadius: 20 }}>
+                        </ImageBackground>
+                    </TouchableOpacity>
 
+                    <Modal visible={modalVisible} transparent={true}>
+                        <ImageViewer
+                            imageUrls={[{ url: tipe === 'ktp' ? form?.uploadKTP?.uri : form?.uploadSelfie?.uri, },]}
+                            enableSwipeDown={true}
+                            onSwipeDown={() => setModalVisible(false)}
+                        />
+                    </Modal>
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -71,5 +117,11 @@ const styles = StyleSheet.create({
         objectFit: 'cover',
         borderRadius: 20,
         backgroundColor: '#F2F2F2',
+    },
+    container: {
+        paddingTop: 10,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
     },
 });

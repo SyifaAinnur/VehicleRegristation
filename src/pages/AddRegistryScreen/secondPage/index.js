@@ -31,9 +31,11 @@ const SecondStep = ({form, setForm}) => {
                 if (tipe === 'ktp') {
                     setImageKTP(dataImage);
                     setForm({...form, uploadKTP: dataImage});
+                    setModalChoose(false);
                 } else {
                     setImageSelfie(dataImage);
                     setForm({...form, uploadSelfie: dataImage});
+                    setModalChoose(false);
                 }
 
             }
@@ -56,9 +58,11 @@ const SecondStep = ({form, setForm}) => {
                 if (tipe === 'ktp') {
                     setImageKTP(dataImage);
                     setForm({...form, uploadKTP: dataImage});
+                    setModalChoose(false);
                 }  else {
                     setImageSelfie(dataImage);
                     setForm({...form, uploadSelfie: dataImage});
+                    setModalChoose(false);
                 }
 
             }
@@ -107,7 +111,7 @@ const SecondStep = ({form, setForm}) => {
                             source={{
                                 uri: imageSelfie ?
                                     imageSelfie?.uri :
-                                    null,
+                                    form?.uploadSelfie?.uri,
                             }}
                             style={styles?.imageProfile}
                             imageStyle={{ borderRadius: 20 }}>
@@ -132,13 +136,13 @@ const SecondStep = ({form, setForm}) => {
                                     borderRadius: 100,
                                     padding: 5,
                                 }}>
-                                {imageSelfie?.uri && imageSelfie.uri.length > 0 ?
+                                {imageSelfie?.uri && imageSelfie.uri.length > 0 || form.uploadSelfie?.uri ?
                                     <MaterialIcons name="visibility" size={20} color="#fff" />
                                     : <MaterialIcons name="photo-camera" size={20} color="#fff" />}
                             </TouchableOpacity>
                         </ImageBackground>
                     </View>
-                    {imageSelfie && imageSelfie.uri.length > 0 && (
+                    {imageSelfie && imageSelfie.uri.length > 0 || form.uploadSelfie?.uri && (
                         <TouchableOpacity onPress={() => setModalChoose(true)}>
                             <Text style={{ color: '#007B9A', textAlign: 'center' }}>Reupload</Text>
                         </TouchableOpacity>
@@ -151,7 +155,7 @@ const SecondStep = ({form, setForm}) => {
                             source={{
                                 uri: imageKTP ?
                                     imageKTP?.uri :
-                                    null,
+                                    form?.uploadKTP?.uri,
                             }}
                             style={styles?.imageProfile}
                             imageStyle={{ borderRadius: 20 }}>
@@ -176,13 +180,13 @@ const SecondStep = ({form, setForm}) => {
                                     borderRadius: 100,
                                     padding: 5,
                                 }}>
-                                {imageKTP?.uri && imageKTP.uri.length > 0 ?
+                                {imageKTP?.uri && imageKTP.uri.length > 0 || form.uploadKTP?.uri ?
                                     <MaterialIcons name="visibility" size={20} color="#fff" />
                                     : <MaterialIcons name="photo-camera" size={20} color="#fff" />}
                             </TouchableOpacity>
                         </ImageBackground>
                     </View>
-                    {imageKTP && imageKTP.uri.length > 0 && (
+                    {imageKTP && imageKTP.uri.length > 0 || form.uploadKTP?.uri && (
                         <TouchableOpacity onPress={() => setModalChoose(true)}>
                             <Text style={{ color: '#007B9A', textAlign: 'center' }}>Reupload</Text>
                         </TouchableOpacity>

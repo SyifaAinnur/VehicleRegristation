@@ -1,8 +1,8 @@
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native"
 import { Gap, TextInput } from "../../../components"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useDispatch } from "react-redux";
-import { getCityData, getDistrictData, getProvinceData, getVillageData } from "../../../redux/actions/global";
+import { findCity, findDistrict, findProvince, findVillage, getCityData, getDistrictData, getProvinceData, getVillageData } from "../../../redux/actions/global";
 import { SelectList } from "react-native-dropdown-select-list";
 import Entypo from 'react-native-vector-icons/Entypo';
 
@@ -15,10 +15,47 @@ const FirstStep = ({ form, setForm }) => {
     const [dataCity, setDataCity] = useState([]);
     const [dataDistrict, setDataDistrict] = useState([]);
     const [dataVillage, setDataVillage] = useState([]);
+    const [province, setProvince] = useState('');
+    const [city, setCity] = useState('');
+    const [district, setDistrict] = useState('');
+    const [village, setVillage] = useState('');
+
+    const setDataField = (field, value) => {
+        setForm(prevForm => ({ ...prevForm, [field]: value }));
+    };
 
     useEffect(() => {
         dispatch(getProvinceData(setData, setLoad));
-    }, []);
+        if (form?.province_id) {
+            dispatch(findProvince(form?.province_id, setProvince,));
+            dispatch(getCityData(form.province_id, setDataCity, setLoad));
+        }
+        if (form?.city_id) {
+            dispatch(findCity(form?.city_id, setCity))
+            dispatch(getDistrictData(form.city_id, setDataDistrict, setLoad));
+        }
+        if (form?.district_id) {
+            dispatch(findDistrict(form?.district_id, setDistrict));
+            dispatch(getVillageData(form.district_id, setDataVillage, setLoad));
+        }
+        if (form?.village_id) dispatch(findVillage(form?.village_id, setVillage));
+    }, [form?.province_id, form?.city_id, form?.district_id, form?.village_id]);
+
+    useEffect(() => {
+        if (province) {
+            setForm({ ...form, province_name: province.name });
+        }
+        if (city) {
+            setForm({ ...form, city_name: city.name });
+        }
+        if (district) {
+            setForm({ ...form, district_name: district.name });
+        }
+        if (village) {
+            setForm({ ...form, village_name: village.name });
+        }
+    }, [province, city, district, village]);
+
 
     return (
         <SafeAreaView style={styles?.page}>
@@ -62,14 +99,14 @@ const FirstStep = ({ form, setForm }) => {
                     <SelectList
                         data={data}
                         labelField="name"
+
                         setSelected={(value) => {
                             setForm({ ...form, province_id: value, city_id: '', district_id: '', village_id: '' });
-                            dispatch(getCityData(value, setDataCity, setLoad));
                         }}
                         search={true}
                         arrowicon={<Entypo name="chevron-down" size={12} color={'black'} />}
                         searchicon={<Entypo name="magnifying-glass" size={12} color={'black'} />}
-                        placeholder="Select Province"
+                        placeholder={province ? province.name : 'Select Province'}
                         placeholderTextColor="#CCCCCC"
                         styles={{
                             container: {
@@ -91,12 +128,11 @@ const FirstStep = ({ form, setForm }) => {
                         labelField="name"
                         setSelected={(value) => {
                             setForm({ ...form, city_id: value, district_id: '', village_id: '' });
-                            dispatch(getDistrictData(value, setDataDistrict, setLoad));
                         }}
                         search={true}
                         arrowicon={<Entypo name="chevron-down" size={12} color={'black'} />}
                         searchicon={<Entypo name="magnifying-glass" size={12} color={'black'} />}
-                        placeholder="Select City"
+                        placeholder={city ? city.name : 'Select City'}
                         placeholderTextColor="#CCCCCC"
 
                         styles={{
@@ -120,12 +156,11 @@ const FirstStep = ({ form, setForm }) => {
                         labelField="name"
                         setSelected={(value) => {
                             setForm({ ...form, district_id: value, village_id: '' });
-                            dispatch(getVillageData(value, setDataVillage, setLoad));
                         }}
                         search={true}
                         arrowicon={<Entypo name="chevron-down" size={12} color={'black'} />}
                         searchicon={<Entypo name="magnifying-glass" size={12} color={'black'} />}
-                        placeholder="Select City"
+                        placeholder={district ? district.name : 'Select District'}
                         placeholderTextColor="#CCCCCC"
 
                         styles={{
@@ -148,12 +183,12 @@ const FirstStep = ({ form, setForm }) => {
                         data={dataVillage}
                         labelField="name"
                         setSelected={(value) => {
-                            setForm({ ...form, village_id: value});
+                            setForm({ ...form, village_id: value });
                         }}
                         search={true}
                         arrowicon={<Entypo name="chevron-down" size={12} color={'black'} />}
                         searchicon={<Entypo name="magnifying-glass" size={12} color={'black'} />}
-                        placeholder="Select City"
+                        placeholder={village ? village.name : 'Select villages / ward'}
                         placeholderTextColor="#CCCCCC"
 
                         styles={{
