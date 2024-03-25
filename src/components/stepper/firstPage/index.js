@@ -89,7 +89,7 @@ const FirstStep = ({ form, setForm }) => {
                         onChangeText={(text) => setForm({ ...form, biodata: text })}
                     />
                     <Gap height={10} />
-                    <Text>Select Province</Text>
+                    <Text style={styles.textBlack}>Select Province</Text>
                     <Gap height={10} />
                     <SelectList
                         data={data}
@@ -102,21 +102,17 @@ const FirstStep = ({ form, setForm }) => {
                         arrowicon={<Entypo name="chevron-down" size={12} color={'black'} />}
                         searchicon={<Entypo name="magnifying-glass" size={12} color={'black'} />}
                         placeholder={province ? province.name : 'Select Province'}
-                        placeholderTextColor="#CCCCCC"
-                        styles={{
-                            container: {
-                                borderWidth: 1,
-                                borderColor: '#CCCCCC',
-                                borderRadius: 5,
-                                padding: 10,
-                            },
-                            text: {
-                                color: '#858585',
-                            },
+                        placeholderTextColor="#858585"
+                        inputStyles={{
+                            color: '#858585'
                         }}
+                        dropdownTextStyles={{
+                            color: '#000'
+                        }}
+                        
                     />
                     <Gap height={10} />
-                    <Text>Select City</Text>
+                    <Text style={styles.textBlack}>Select City</Text>
                     <Gap height={10} />
                     <SelectList
                         data={dataCity}
@@ -128,23 +124,17 @@ const FirstStep = ({ form, setForm }) => {
                         arrowicon={<Entypo name="chevron-down" size={12} color={'black'} />}
                         searchicon={<Entypo name="magnifying-glass" size={12} color={'black'} />}
                         placeholder={city ? city.name : 'Select City'}
-                        placeholderTextColor="#CCCCCC"
-
-                        styles={{
-                            container: {
-                                borderWidth: 1,
-                                borderColor: '#CCCCCC',
-                                borderRadius: 5,
-                                padding: 10,
-                            },
-                            text: {
-                                color: '#858585',
-                            },
+                        placeholderTextColor="#000"
+                        inputStyles={{
+                            color: '#858585'
+                        }}
+                        dropdownTextStyles={{
+                            color: '#000'
                         }}
                     />
 
                     <Gap height={10} />
-                    <Text>Select District</Text>
+                    <Text style={styles.textBlack}>Select District</Text>
                     <Gap height={10} />
                     <SelectList
                         data={dataDistrict}
@@ -156,23 +146,17 @@ const FirstStep = ({ form, setForm }) => {
                         arrowicon={<Entypo name="chevron-down" size={12} color={'black'} />}
                         searchicon={<Entypo name="magnifying-glass" size={12} color={'black'} />}
                         placeholder={district ? district.name : 'Select District'}
-                        placeholderTextColor="#CCCCCC"
-
-                        styles={{
-                            container: {
-                                borderWidth: 1,
-                                borderColor: '#CCCCCC',
-                                borderRadius: 5,
-                                padding: 10,
-                            },
-                            text: {
-                                color: '#858585',
-                            },
+                        placeholderTextColor="#000"
+                        inputStyles={{
+                            color: '#858585'
+                        }}
+                        dropdownTextStyles={{
+                            color: '#000'
                         }}
                     />
 
                     <Gap height={10} />
-                    <Text>Select villages / ward</Text>
+                    <Text style={styles.textBlack}>Select villages / ward</Text>
                     <Gap height={10} />
                     <SelectList
                         data={dataVillage}
@@ -185,17 +169,11 @@ const FirstStep = ({ form, setForm }) => {
                         searchicon={<Entypo name="magnifying-glass" size={12} color={'black'} />}
                         placeholder={village ? village.name : 'Select villages / ward'}
                         placeholderTextColor="#CCCCCC"
-
-                        styles={{
-                            container: {
-                                borderWidth: 1,
-                                borderColor: '#CCCCCC',
-                                borderRadius: 5,
-                                padding: 10,
-                            },
-                            text: {
-                                color: '#858585',
-                            },
+                        inputStyles={{
+                            color: '#858585'
+                        }}
+                        dropdownTextStyles={{
+                            color: '#000'
                         }}
                     />
                 </View>
@@ -213,5 +191,8 @@ const styles = StyleSheet.create({
     },
     center: {
         alignItems: 'center',
+    },
+    textBlack: {
+        color: '#4F4F4F',
     },
 });

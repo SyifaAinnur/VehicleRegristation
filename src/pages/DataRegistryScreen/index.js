@@ -6,10 +6,10 @@ import { Button, Gap } from "../../components";
 import DataNotFound from "../../components/atomics/DataNotFound";
 import HeaderPrimary from "../../components/molecules/HeaderPrimary";
 
-const DataRegistry = ({navigation}) => {
+const DataRegistry = ({ navigation }) => {
     const [tipe, setTipe] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
-    const {allData} = useSelector((state) => state.globalReducer);
+    const { allData } = useSelector((state) => state.globalReducer);
     console.log('allDatas', allData);
 
     return (
@@ -19,99 +19,104 @@ const DataRegistry = ({navigation}) => {
                 type={'back'}
                 onPress={() => navigation.goBack()}
             />
-            {allData.length > 0 ? (
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={{ paddingHorizontal: 15 }}>
-                    <View style={styles?.container}>
-                        <View style={styles?.title}>
-                            <Text>First Name: </Text>
+            {Object.keys(allData).length !== 0 ? (
+                <SafeAreaView style={styles?.page}>
+                    <ScrollView showsVerticalScrollIndicator={false}>
+                        <View style={{ paddingHorizontal: 15 }}>
+                            <View style={styles?.container}>
+                                <View style={styles?.titleContainer}>
+                                    <Text style={styles.title}>First Name: </Text>
+                                    <Gap height={10} />
+                                    <Text style={styles.title}>Last Name: </Text>
+                                    <Gap height={10} />
+                                    <Text style={styles.title}>Biodata: </Text>
+                                    <Gap height={10} />
+                                    <Text style={styles.title}>Province: </Text>
+                                    <Gap height={10} />
+                                    <Text style={styles.title}>City: </Text>
+                                    <Gap height={10} />
+                                    <Text style={styles.title}>District: </Text>
+                                    <Gap height={10} />
+                                    <Text style={styles.title}>Village: </Text>
+                                    <Gap height={10} />
+                                    <Text style={styles.title}>No Polisi: </Text>
+                                    <Gap height={10} />
+                                    <Text style={styles.title}>Nama Pemilik: </Text>
+                                    <Gap height={10} />
+                                    <Text style={styles.title}>No KTP: </Text>
+                                </View>
+                                <View style={styles.valueContainer}>
+                                    <Text style={styles.value}>{allData?.firstName ?? "-"}</Text>
+                                    <Gap height={10} />
+                                    <Text style={styles.value}>{allData?.lastName ?? "-"}</Text>
+                                    <Gap height={10} />
+                                    <Text style={styles.value}>{allData?.biodata ?? "-"}</Text>
+                                    <Gap height={10} />
+                                    <Text style={styles.value}>{allData?.province_name ?? "-"}</Text>
+                                    <Gap height={10} />
+                                    <Text style={styles.value}>{allData?.city_name ?? "-"}</Text>
+                                    <Gap height={10} />
+                                    <Text style={styles.value}>{allData?.district_name ?? "-"}</Text>
+                                    <Gap height={10} />
+                                    <Text style={styles.value}>{allData?.village_name ?? "-"}</Text>
+                                    <Gap height={10} />
+                                    <Text style={styles.value}>{allData?.noPolisi ?? "-"}</Text>
+                                    <Gap height={10} />
+                                    <Text style={styles.value}>{allData?.namaPemilik ?? "-"}</Text>
+                                    <Gap height={10} />
+                                    <Text style={styles.value}>{allData?.noKTP ?? "-"}</Text>
+                                </View>
+                            </View>
                             <Gap height={10} />
-                            <Text>Last Name: </Text>
+                            <Text style={styles.title}>Selfie</Text>
                             <Gap height={10} />
-                            <Text>Biodata: </Text>
-                            <Gap height={10} />
-                            <Text>Province: </Text>
-                            <Gap height={10} />
-                            <Text>City: </Text>
-                            <Gap height={10} />
-                            <Text>District: </Text>
-                            <Gap height={10} />
-                            <Text>Village: </Text>
-                            <Gap height={10} />
-                            <Text>No Polisi: </Text>
-                            <Gap height={10} />
-                            <Text>Nama Pemilik: </Text>
-                            <Gap height={10} />
-                            <Text>No KTP: </Text>
-                        </View>
-                        <View style={styles.value}>
-                            <Text>{allData.firstName ?? "-"}</Text>
-                            <Gap height={10} />
-                            <Text>{allData.lastName ?? "-"}</Text>
-                            <Gap height={10} />
-                            <Text>{allData.biodata ?? "-"}</Text>
-                            <Gap height={10} />
-                            <Text>{allData.province_name ?? "-"}</Text>
-                            <Gap height={10} />
-                            <Text>{allData.city_name ?? "-"}</Text>
-                            <Gap height={10} />
-                            <Text>{allData.district_name ?? "-"}</Text>
-                            <Gap height={10} />
-                            <Text>{allData.village_name ?? "-"}</Text>
-                            <Gap height={10} />
-                            <Text>{allData.noPolisi ?? "-"}</Text>
-                            <Gap height={10} />
-                            <Text>{allData.namaPemilik ?? "-"}</Text>
-                            <Gap height={10} />
-                            <Text>{allData.noKTP ?? "-"}</Text>
-                        </View>
-                    </View>
-                    <Text>Selfie</Text>
-                    <TouchableOpacity onPress={() => {
-                        setTipe('selfie');
-                        setModalVisible(true);
-                    }}>
-                        <ImageBackground
-                            source={{
-                                uri: allData?.uploadSelfie ?
-                                    allData?.uploadSelfie?.uri :
-                                    'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',
-                            }}
-                            style={styles?.imageProfile}
-                            imageStyle={{ borderRadius: 20 }}>
+                            <TouchableOpacity onPress={() => {
+                                setTipe('selfie');
+                                setModalVisible(true);
+                            }}>
+                                <ImageBackground
+                                    source={{
+                                        uri: allData?.uploadSelfie ?
+                                            allData?.uploadSelfie?.uri :
+                                            'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',
+                                    }}
+                                    style={styles?.imageProfile}
+                                    imageStyle={{ borderRadius: 20 }}>
 
-                        </ImageBackground>
-                    </TouchableOpacity>
-                    <Gap height={10} />
-                    <Text>KTP</Text>
-                    <TouchableOpacity onPress={() => {
-                        setTipe('ktp');
-                        setModalVisible(true);
-                    }}>
-                        <ImageBackground
-                            source={{
-                                uri: allData?.uploadKTP ?
-                                    allData?.uploadKTP?.uri :
-                                    'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',
-                            }}
-                            style={styles?.imageProfile}
-                            imageStyle={{ borderRadius: 20 }}>
-                        </ImageBackground>
-                    </TouchableOpacity>
+                                </ImageBackground>
+                            </TouchableOpacity>
+                            <Gap height={10} />
+                            <Text style={styles.title}>KTP</Text>
+                            <Gap height={10} />
+                            <TouchableOpacity onPress={() => {
+                                setTipe('ktp');
+                                setModalVisible(true);
+                            }}>
+                                <ImageBackground
+                                    source={{
+                                        uri: allData?.uploadKTP ?
+                                            allData?.uploadKTP?.uri :
+                                            'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',
+                                    }}
+                                    style={styles?.imageProfile}
+                                    imageStyle={{ borderRadius: 20 }}>
+                                </ImageBackground>
+                            </TouchableOpacity>
 
-                    <Modal visible={modalVisible} transparent={true}>
-                        <ImageViewer
-                            imageUrls={[{ url: tipe === 'ktp' ? allData?.uploadKTP?.uri : allData?.uploadSelfie?.uri, },]}
-                            enableSwipeDown={true}
-                            onSwipeDown={() => setModalVisible(false)}
-                        />
-                    </Modal>
-                </View>
-            </ScrollView>
+                            <Modal visible={modalVisible} transparent={true}>
+                                <ImageViewer
+                                    imageUrls={[{ url: tipe === 'ktp' ? allData?.uploadKTP?.uri : allData?.uploadSelfie?.uri, },]}
+                                    enableSwipeDown={true}
+                                    onSwipeDown={() => setModalVisible(false)}
+                                />
+                            </Modal>
+                        </View>
+                    </ScrollView>
+                </SafeAreaView>
             ) : (
                 <View style={styles.center}>
-                   <DataNotFound text={'Tidak ada data'} />
-                   <Button title="Add Registry" onPress={() => navigation.navigate('AddRegistryScreen')} />
+                    <DataNotFound text={'Tidak ada data'} />
+                    <Button title="Add Registry" onPress={() => navigation.navigate('AddRegistryScreen')} />
                 </View>
             )}
         </SafeAreaView>
@@ -141,4 +146,10 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'space-between',
     },
+    title: {
+        color: '#4F4F4F',
+    },
+    value: {
+        color: '#000',
+    }
 });

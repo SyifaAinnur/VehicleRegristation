@@ -12,50 +12,52 @@ const FinishStep = ({ form }) => {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{ paddingHorizontal: 15 }}>
                     <View style={styles?.container}>
-                        <View style={styles?.title}>
-                            <Text>First Name: </Text>
+                        <View style={styles?.titleContainer}>
+                            <Text style={styles.title}>First Name: </Text>
                             <Gap height={10} />
-                            <Text>Last Name: </Text>
+                            <Text style={styles.title}>Last Name: </Text>
                             <Gap height={10} />
-                            <Text>Biodata: </Text>
+                            <Text style={styles.title}>Biodata: </Text>
                             <Gap height={10} />
-                            <Text>Province: </Text>
+                            <Text style={styles.title}>Province: </Text>
                             <Gap height={10} />
-                            <Text>City: </Text>
+                            <Text style={styles.title}>City: </Text>
                             <Gap height={10} />
-                            <Text>District: </Text>
+                            <Text style={styles.title}>District: </Text>
                             <Gap height={10} />
-                            <Text>Village: </Text>
+                            <Text style={styles.title}>Village: </Text>
                             <Gap height={10} />
-                            <Text>No Polisi: </Text>
+                            <Text style={styles.title}>No Polisi: </Text>
                             <Gap height={10} />
-                            <Text>Nama Pemilik: </Text>
+                            <Text style={styles.title}>Nama Pemilik: </Text>
                             <Gap height={10} />
-                            <Text>No KTP: </Text>
+                            <Text style={styles.title}>No KTP: </Text>
                         </View>
-                        <View style={styles.value}>
-                            <Text>{form.firstName ?? "-"}</Text>
+                        <View style={styles.valueContainer}>
+                            <Text style={styles.value}>{form.firstName ?? "-"}</Text>
                             <Gap height={10} />
-                            <Text>{form.lastName ?? "-"}</Text>
+                            <Text style={styles.value}>{form.lastName ?? "-"}</Text>
                             <Gap height={10} />
-                            <Text>{form.biodata ?? "-"}</Text>
+                            <Text style={styles.value}>{form.biodata ?? "-"}</Text>
                             <Gap height={10} />
-                            <Text>{form.province_name ?? "-"}</Text>
+                            <Text style={styles.value}>{form.province_name ?? "-"}</Text>
                             <Gap height={10} />
-                            <Text>{form.city_name ?? "-"}</Text>
+                            <Text style={styles.value}>{form.city_name ?? "-"}</Text>
                             <Gap height={10} />
-                            <Text>{form.district_name ?? "-"}</Text>
+                            <Text style={styles.value}>{form.district_name ?? "-"}</Text>
                             <Gap height={10} />
-                            <Text>{form.village_name ?? "-"}</Text>
+                            <Text style={styles.value}>{form.village_name ?? "-"}</Text>
                             <Gap height={10} />
-                            <Text>{form.noPolisi ?? "-"}</Text>
+                            <Text style={styles.value}>{form.noPolisi ?? "-"}</Text>
                             <Gap height={10} />
-                            <Text>{form.namaPemilik ?? "-"}</Text>
+                            <Text style={styles.value}>{form.namaPemilik ?? "-"}</Text>
                             <Gap height={10} />
-                            <Text>{form.noKTP ?? "-"}</Text>
+                            <Text style={styles.value}>{form.noKTP ?? "-"}</Text>
                         </View>
                     </View>
-                    <Text>Selfie</Text>
+                    <Gap height={10} />
+                    <Text style={styles.title}>Selfie</Text>
+                    <Gap height={10} />
                     <TouchableOpacity onPress={() => {
                         setTipe('selfie');
                         setModalVisible(true);
@@ -72,7 +74,8 @@ const FinishStep = ({ form }) => {
                         </ImageBackground>
                     </TouchableOpacity>
                     <Gap height={10} />
-                    <Text>KTP</Text>
+                    <Text style={styles.title}>KTP</Text>
+                    <Gap height={10} />
                     <TouchableOpacity onPress={() => {
                         setTipe('ktp');
                         setModalVisible(true);
@@ -124,4 +127,10 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'space-between',
     },
+    title: {
+        color: '#4F4F4F',
+    },
+    value: {
+        color: '#000',
+    }
 });

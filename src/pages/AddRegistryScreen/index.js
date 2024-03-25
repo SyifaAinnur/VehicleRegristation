@@ -1,6 +1,6 @@
 import { Modal, SafeAreaView, StyleSheet, View } from "react-native";
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
-import { Text } from "react-native-svg";
+import { Text, err } from "react-native-svg";
 import {
     heightPercentageToDP as hp,
     widthPercentageToDP as wp,
@@ -18,9 +18,8 @@ import { Modalize } from "react-native-modalize";
 
 const AddRegistryScreen = ({ navigation }) => {
     const dispatch = useDispatch();
-    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [error, setError] = useState(false)  
     const { allData } = useSelector((state) => state.globalReducer);
-    console.log('allData', allData);
     // local state
     const [formFirstPage, setFormFirstPage] = useState({
         firstName: '',
@@ -53,6 +52,7 @@ const AddRegistryScreen = ({ navigation }) => {
                 text1: 'Error',
                 text2: 'Please fill all the form',
             });
+            setError(true)
         }
     }
 
@@ -66,6 +66,7 @@ const AddRegistryScreen = ({ navigation }) => {
                 text1: 'Error',
                 text2: 'Please fill all the form',
             });
+            setError(true)
         }
     }
 
@@ -89,12 +90,12 @@ const AddRegistryScreen = ({ navigation }) => {
                 onPress={() => navigation.goBack()}
             />
             <ProgressSteps>
-                <ProgressStep label="Personal Infromation" onNext={() => onHandleFirstNext()} onPrevious={() => console.log('previous')} >
+                <ProgressStep label="Personal Infromation" onNext={() => onHandleFirstNext()} onPrevious={() => console.log('previous')} errors={error}>
                     <View style={{ alignItems: 'left' }}>
                         <FirstStep form={formFirstPage} setForm={setFormFirstPage} />
                     </View>
                 </ProgressStep>
-                <ProgressStep label="Vehicle Information" onNext={() => onHandleSecondNext()}>
+                <ProgressStep label="Vehicle Information" onNext={() => onHandleSecondNext()} errors={error}>
                     <View style={{ alignItems: 'left' }}>
                         <SecondStep form={formSecondPage} setForm={setFormSecondPage} />
                     </View>
@@ -105,19 +106,6 @@ const AddRegistryScreen = ({ navigation }) => {
                     </View>
                 </ProgressStep>
             </ProgressSteps>
-            {/* <View style={styles.container}>
-                <Modal isVisible={isModalVisible} transparent={true} animationType="slide">
-                    <View style={styles.modalContainer}>
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                            <Text>Modal Content</Text>
-                            <Button title="OK" onPress={() => {
-                                setIsModalVisible(false);
-                                // Navigasi ke halaman lain disini
-                            }} />
-                        </View>
-                    </View>
-                </Modal>
-            </View> */}
         </SafeAreaView>
     )
 }

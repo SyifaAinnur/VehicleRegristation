@@ -101,7 +101,7 @@ const SecondStep = ({form, setForm}) => {
                         onChangeText={(text) => setForm({ ...form, noKTP: text })}
                     />
                     <Gap height={10} />
-                    <Text>Upload Selfie</Text>
+                    <Text style={styles.textBlack}>Upload Selfie</Text>
                     <Gap height={10} />
                     <View style={styles?.center}>
                         <ImageBackground
@@ -145,7 +145,7 @@ const SecondStep = ({form, setForm}) => {
                         </TouchableOpacity>
                     )}
 
-                    <Text>Upload KTP</Text>
+                    <Text style={styles.textBlack}>Upload KTP</Text>
                     <Gap height={10} />
                     <View style={styles?.center}>
                         <ImageBackground
@@ -202,7 +202,7 @@ const SecondStep = ({form, setForm}) => {
                         <Modal visible={modalChoose} transparent={true} animationType="slide">
                             <View style={styles.modalContainer}>
                                 <View style={styles.buttonContainer}>
-                                    <Text>Choose Image</Text>
+                                    <Text style={styles.textBlack}>Choose Image</Text>
                                     <Gap height={10} />
                                     <View style={styles.buttonPosition}>
                                         {tipe === 'ktp' ? (
@@ -219,7 +219,7 @@ const SecondStep = ({form, setForm}) => {
                                     </View>
                                     <Gap height={10} />
                                     <TouchableOpacity onPress={() => setModalChoose(false)}>
-                                        <Text>Cancel</Text>
+                                        <Text style={styles.textBlack}>Cancel</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -273,8 +273,14 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     buttonPosition: {
+        alignContent: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
         flexDirection: 'row',
-        justifyContent: 'space-between',
+       flexWrap: 'wrap',
         width: '100%',
+    },
+    textBlack: {
+        color: '#4F4F4F',
     },
 });
