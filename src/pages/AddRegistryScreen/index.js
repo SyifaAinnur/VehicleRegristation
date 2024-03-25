@@ -15,6 +15,7 @@ import SecondStep from "../../components/stepper/secondPage";
 import FinishStep from "../../components/stepper/thirdPage";
 import Toast from 'react-native-toast-message';
 import { Modalize } from "react-native-modalize";
+import { showMessage } from "../../utils";
 
 const AddRegistryScreen = ({ navigation }) => {
     const dispatch = useDispatch();
@@ -47,13 +48,38 @@ const AddRegistryScreen = ({ navigation }) => {
         // save global state
         dispatch({ type: 'SET_ALL_DATA', value: formFirstPage });
         if (formFirstPage.firstName === '' || formFirstPage.lastName === '' || formFirstPage.biodata === '' || formFirstPage.province_id === '' || formFirstPage.city_id === '' || formFirstPage.district_id === '' || formFirstPage.village_id === '') {
-            Toast.show({
-                type: 'error',
-                text1: 'Error',
-                text2: 'Please fill all the form',
-            });
+            showMessage('Please fill all the form', 'error');
             setError(true)
-        } else {
+        } 
+        if(formFirstPage?.firstName === ''){
+            showMessage('First Name is required', 'error');
+            setError(true)
+        }
+        if(formFirstPage?.lastName === ''){
+            showMessage('Last Name is required', 'error');
+            setError(true)
+        }
+        if(formFirstPage?.biodata === ''){
+            showMessage('Biodata is required', 'error');
+            setError(true)
+        }
+        if(formFirstPage?.province_id === ''){
+            showMessage('Province is required', 'error');
+            setError(true)
+        }
+        if(formFirstPage?.city_id === ''){
+            showMessage('City is required', 'error');
+            setError(true)
+        }
+        if(formFirstPage?.district_id === ''){
+            showMessage('District is required', 'error');
+            setError(true)
+        }
+        if(formFirstPage?.village_id === ''){
+            showMessage('Village is required', 'error');
+            setError(true)
+        }
+        else {
             setError(false)
         }
     }

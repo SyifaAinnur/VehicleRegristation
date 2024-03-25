@@ -119,6 +119,7 @@ const DataRegistry = ({ navigation }) => {
                     <Button title="Add Registry" onPress={() => navigation.navigate('AddRegistryScreen')} />
                 </View>
             )}
+            <Gap height={20} />
         </SafeAreaView>
     )
 }
@@ -147,9 +148,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     title: {
-        color: '#4F4F4F',
+        color: '#000',
     },
     value: {
-        color: '#000',
+        color: 'rgba(0, 0, 0, 0.5)',
     }
 });

@@ -22,7 +22,8 @@ const SplashScreen = ({ navigation }) => {
         start={{ x: 0, y: 0.5 }}
         end={{ x: 1, y: 0 }}
         style={styles.gradient}>
-        <Text style={styles.txt}>Vehicle Registration</Text>
+        <Text style={styles.txt}>Vehicle</Text>
+        <Text style={styles.txt}>Registration</Text>
       </LinearGradient>
     </SafeAreaView>
   );
@@ -43,9 +44,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   txt: {
-    fontSize: 40,
+    fontSize: 35,
     fontWeight: 'bold',
     color: '#03596F',
+    textAlign: 'center'
   },
   LogoBengkel: {
     width: wp('30%'),

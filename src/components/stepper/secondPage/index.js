@@ -6,7 +6,7 @@ import { ImageBackground, Modal, SafeAreaView, ScrollView, StyleSheet, Text, Tou
 import { useState } from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-const SecondStep = ({form, setForm}) => {
+const SecondStep = ({ form, setForm }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [modalChoose, setModalChoose] = useState(false);
     const [tipe, setTipe] = useState('');
@@ -27,11 +27,11 @@ const SecondStep = ({form, setForm}) => {
                 };
                 if (tipe === 'ktp') {
                     setImageKTP(dataImage);
-                    setForm({...form, uploadKTP: dataImage});
+                    setForm({ ...form, uploadKTP: dataImage });
                     setModalChoose(false);
                 } else {
                     setImageSelfie(dataImage);
-                    setForm({...form, uploadSelfie: dataImage});
+                    setForm({ ...form, uploadSelfie: dataImage });
                     setModalChoose(false);
                 }
 
@@ -54,11 +54,11 @@ const SecondStep = ({form, setForm}) => {
                 };
                 if (tipe === 'ktp') {
                     setImageKTP(dataImage);
-                    setForm({...form, uploadKTP: dataImage});
+                    setForm({ ...form, uploadKTP: dataImage });
                     setModalChoose(false);
-                }  else {
+                } else {
                     setImageSelfie(dataImage);
-                    setForm({...form, uploadSelfie: dataImage});
+                    setForm({ ...form, uploadSelfie: dataImage });
                     setModalChoose(false);
                 }
 
@@ -101,7 +101,7 @@ const SecondStep = ({form, setForm}) => {
                         onChangeText={(text) => setForm({ ...form, noKTP: text })}
                     />
                     <Gap height={10} />
-                    <Text style={styles.textBlack}>Upload Selfie</Text>
+                    <Text style={styles.textBlack}>Upload Selfie with KTP</Text>
                     <Gap height={10} />
                     <View style={styles?.center}>
                         <ImageBackground
@@ -139,9 +139,11 @@ const SecondStep = ({form, setForm}) => {
                             </TouchableOpacity>
                         </ImageBackground>
                     </View>
+                    <Gap height={10} />
+
                     {form.uploadSelfie?.uri && (
-                        <TouchableOpacity onPress={() => setModalChoose(true)}>
-                            <Text style={{ color: '#007B9A', textAlign: 'center' }}>Reupload</Text>
+                        <TouchableOpacity onPress={() => setModalChoose(true)} style={styles.btn}>
+                            <Text style={{ color: '#000', textAlign: 'center' }}>Reupload</Text>
                         </TouchableOpacity>
                     )}
 
@@ -184,14 +186,14 @@ const SecondStep = ({form, setForm}) => {
                         </ImageBackground>
                     </View>
                     {form.uploadKTP?.uri && (
-                        <TouchableOpacity onPress={() => setModalChoose(true)}>
-                            <Text style={{ color: '#007B9A', textAlign: 'center' }}>Reupload</Text>
+                        <TouchableOpacity onPress={() => setModalChoose(true)} style={styles.btn}>
+                            <Text style={{ color: '#000', textAlign: 'center' }}>Reupload</Text>
                         </TouchableOpacity>
                     )}
 
                     <Modal visible={modalVisible} transparent={true}>
                         <ImageViewer
-                            imageUrls={[ { url: tipe === 'ktp' ? imageKTP?.uri : imageSelfie?.uri, }, ]}
+                            imageUrls={[{ url: tipe === 'ktp' ? imageKTP?.uri : imageSelfie?.uri, },]}
                             // imageUrls={[{ url: imageSelfie?.uri, },]}
                             enableSwipeDown={true}
                             onSwipeDown={() => setModalVisible(false)}
@@ -277,10 +279,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-       flexWrap: 'wrap',
+        flexWrap: 'wrap',
         width: '100%',
     },
     textBlack: {
         color: '#4F4F4F',
+    },
+    btn: {
+        backgroundColor: 'rgba(0, 0, 0, 0.1)',
+        padding: 10,
+        borderRadius: 10,
+        marginVertical: 10,
     },
 });

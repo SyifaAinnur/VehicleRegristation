@@ -4,6 +4,8 @@ import { Gap, ItemHome } from '../../components'
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen'
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
 import { useNavigation } from '@react-navigation/native'
+import AntDesign from 'react-native-vector-icons/AntDesign'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 const HomeScreen = () => {
     const navigation = useNavigation();
@@ -13,9 +15,13 @@ const HomeScreen = () => {
             <Gap height={20} />
             <View style={styles.container}>
                 <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('AddRegistryScreen')}>
+                    <AntDesign name="adduser" size={24} color="black" />
+                    <Gap height={5} />
                     <Text style={styles.txt}>Add Registry</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('DataRegistryScreen')}>
+                    <FontAwesome name="address-book" size={24} color="black" />
+                    <Gap height={5} />
                     <Text style={styles.txt}>Data Registry</Text>
                 </TouchableOpacity>
             </View>
@@ -40,13 +46,13 @@ const styles = StyleSheet.create({
         width: wp('42%'),
         height: hp('20%'),
         borderWidth: 2,
-        borderColor: '#4CCD99',
+        borderColor: '#666',
         borderRadius: 15,
         justifyContent: 'center',
         alignItems: 'center',
     },
     txt: {
-        fontSize: 18,
+        fontSize: 14,
         fontWeight: 'bold',
         color: '#000',
     },

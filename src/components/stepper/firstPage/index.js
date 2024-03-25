@@ -94,7 +94,6 @@ const FirstStep = ({ form, setForm }) => {
                     <SelectList
                         data={data}
                         labelField="name"
-
                         setSelected={(value) => {
                             setForm({ ...form, province_id: value, city_id: '', district_id: '', village_id: '' });
                         }}
@@ -109,7 +108,6 @@ const FirstStep = ({ form, setForm }) => {
                         dropdownTextStyles={{
                             color: '#000'
                         }}
-                        
                     />
                     <Gap height={10} />
                     <Text style={styles.textBlack}>Select City</Text>
